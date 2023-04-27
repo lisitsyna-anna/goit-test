@@ -1,16 +1,25 @@
-export const App = () => {
+import { lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { theme } from 'constants/theme';
+import GlobalStyle from './ClobalStyle';
+import SharedLayout from './SharedLayout';
+
+const HomePage = lazy(() => import('../pages/HomePage'));
+const TweetsPage = lazy(() => import('../pages/TweetsPage'));
+
+const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/tweets" element={<TweetsPage />} />
+        </Route>
+      </Routes>
+    </ThemeProvider>
   );
 };
+
+export default App;
