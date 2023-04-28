@@ -16,7 +16,7 @@ export const Card = styled.li`
     flex-basis: calc((100% - 50px) / 3);
   }
 
-  @media screen and (min-width: 1440px) {
+  @media screen and (min-width: 1200px) {
     flex-basis: calc((100% - 96px) / 3);
   }
 `;
@@ -89,7 +89,7 @@ export const TextWrapper = styled.div`
   font-size: ${p => p.theme.fontSizes.l};
   font-weight: ${p => p.theme.fontWeights.medium};
 
-  @media screen and (min-width: 1440px) {
+  @media screen and (min-width: 1200px) {
     font-size: ${p => p.theme.fontSizes.xl};
   }
 `;

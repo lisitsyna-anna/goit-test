@@ -1,5 +1,14 @@
+import { useState } from 'react';
+import { updateUserFollowers } from 'services/userAPI';
+import {
+  saveToLocalStorage,
+  removeFromLocalStorage,
+  loadFromLocalStorage,
+} from 'services/localStorage';
+
 import logo from '../../images/logo-2x.png';
 import cartBgImg from '../../images/cardBg-2x.png';
+import defaultUserAvatar from '../../images/avatar-2x.png';
 import FollowButton from 'components/FollowButton';
 
 import {
@@ -13,6 +22,34 @@ import {
 } from './UserCard.styled';
 
 const UserCard = ({ id, avatar, tweets, followers }) => {
+  const [following, setFollowing] = useState(
+    loadFromLocalStorage(`user_${id}`) || false
+  );
+  const [followersCount, setFollowersCount] = useState(followers);
+
+  const handleFollowButtonClick = async () => {
+    if (!following) {
+      const updatedUser = await updateUserFollowers(id, {
+        followers: followersCount + 1,
+      });
+
+      saveToLocalStorage(`user_${id}`, true);
+      setFollowersCount(updatedUser.followers);
+      setFollowing(true);
+    } else {
+      const updatedUser = await updateUserFollowers(id, {
+        followers: followersCount - 1,
+      });
+
+      removeFromLocalStorage(`user_${id}`);
+      setFollowersCount(updatedUser.followers);
+      setFollowing(false);
+    }
+  };
+
+  const buttonText = following ? 'Following' : 'Follow';
+  const buttonBgColor = following ? '#5CD3A8' : '#EBD8FF';
+
   return (
     <Card key={id}>
       <UpperWrapper>
@@ -23,15 +60,24 @@ const UserCard = ({ id, avatar, tweets, followers }) => {
       </UpperWrapper>
       <UserInfoWrapper>
         <AvatarWrapper>
-          <StyledAvatar src={avatar} alt="User avatar" width="62" height="62" />
+          <StyledAvatar
+            src={avatar || defaultUserAvatar}
+            alt="User avatar"
+            width="62"
+            height="62"
+          />
         </AvatarWrapper>
 
         <TextWrapper>
           <p>{tweets} tweets</p>
-          <p>{followers} followers</p>
+          <p>{followersCount} followers</p>
         </TextWrapper>
 
-        <FollowButton text="Follow" backgroundColor="#EBD8FF" />
+        <FollowButton
+          text={buttonText}
+          backgroundColor={buttonBgColor}
+          handleFollowButtonClick={handleFollowButtonClick}
+        />
       </UserInfoWrapper>
     </Card>
   );

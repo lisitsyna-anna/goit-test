@@ -7,7 +7,7 @@ export const StyledBtn = styled.button`
   margin: 0 auto;
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
   border-radius: ${p => p.theme.radii.btnRadius};
-  transition: all 300ms linear;
+  transition: all 250ms linear;
   background-color: ${p => p.theme.colors.followBtnBgColor};
   text-transform: uppercase;
 
@@ -15,12 +15,18 @@ export const StyledBtn = styled.button`
   font-size: ${p => p.theme.fontSizes.m};
   font-weight: ${p => p.theme.fontWeights.semiBold};
 
-  @media screen and (min-width: 1440px) {
+  @media screen and (min-width: 1200px) {
     font-size: ${p => p.theme.fontSizes.l};
+    height: 50px;
+    width: 196px;
   }
 
   &:hover,
   &:focus {
     background-color: ${p => p.theme.colors.hoverBtnColor};
+  }
+
+  &:disabled {
+    background-color: ${p => p.theme.colors.disabledBtn};
   }
 `;

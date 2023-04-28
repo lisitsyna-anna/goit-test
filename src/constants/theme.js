@@ -7,6 +7,7 @@ export const theme = {
     followingBtnBgColor: '#2196F3',
     hoverBtnColor: '#5CD3A8',
     borderColor: '#EBD8FF',
+    disabledBtn: 'rgba(255, 255, 255, 0.3);',
   },
   fonts: {
     body: 'Montserrat, sans-serif',

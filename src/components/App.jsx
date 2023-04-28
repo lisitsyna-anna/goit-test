@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { theme } from 'constants/theme';
+import { theme } from 'constants';
 import GlobalStyle from './ClobalStyle';
 import SharedLayout from './SharedLayout';
 
@@ -16,6 +16,7 @@ const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/tweets" element={<TweetsPage />} />
+          <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
     </ThemeProvider>

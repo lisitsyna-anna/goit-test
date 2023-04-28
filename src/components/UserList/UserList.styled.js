@@ -9,9 +9,11 @@ export const CartList = styled.ul`
   @media screen and (min-width: 768px) {
     flex-direction: row;
     margin-bottom: 50px;
+
+    flex-wrap: wrap;
   }
 
-  @media screen and (min-width: 1440px) {
+  @media screen and (min-width: 1200px) {
     gap: 48px;
     margin-bottom: 60px;
   }

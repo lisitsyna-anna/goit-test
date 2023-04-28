@@ -1,24 +1,54 @@
 import { useState, useEffect } from 'react';
-import { getUsers } from 'services/userAPI';
+import {
+  getUsersWithPagination,
+  getTotalUsers,
+  loadFromLocalStorage,
+  saveToLocalStorage,
+} from 'services';
 
-import MainContainer from 'components/MainContainer';
+import { getVisibleUsers } from 'helpers';
+import { STORAGE_KEY_FILTER } from 'constants';
+
 import UserList from 'components/UserList';
 import RequestError from 'components/RequestError';
 import Loader from 'components/Loader';
 import LoadMoreButton from 'components/LoadMoreButton';
+import Filter from 'components/Filter';
+
+import { ContainerTweetsPage } from './TweetsPage.styled';
 
 const TweetsPage = () => {
   const [users, setUsers] = useState([]);
+  const [totalUsers, setTotalUsers] = useState(null);
+  const [filter, setFilter] = useState(
+    loadFromLocalStorage(STORAGE_KEY_FILTER) || 'showAll'
+  );
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function getUsersData() {
-      setIsLoading(true);
       try {
-        const newUsers = await getUsers(page);
+        setIsLoading(true);
+        const newUsers = await getUsersWithPagination(page);
         setUsers(prevUsers => [...prevUsers, ...newUsers]);
+        setError(null);
+      } catch (error) {
+        setError(error.messsage);
+      } finally {
+        setIsLoading(false);
+        setIsLoadingMore(false);
+      }
+    }
+    getUsersData();
+
+    async function getTotalUsersAmount() {
+      try {
+        setIsLoading(true);
+        const total = await getTotalUsers();
+        setTotalUsers(total);
         setError(null);
       } catch (error) {
         setError(error.messsage);
@@ -26,21 +56,41 @@ const TweetsPage = () => {
         setIsLoading(false);
       }
     }
-    getUsersData();
+
+    getTotalUsersAmount();
   }, [page]);
 
-  const handleLoadMore = () => {
-    console.log('Нажали на Load More');
+  const handleLoadMore = async () => {
+    setIsLoadingMore(true);
+    setPage(prevPage => prevPage + 1);
   };
 
-  return (
-    <MainContainer>
-      {isLoading && <Loader isLoading={isLoading} />}
-      {error && <RequestError />}
-      {users.length > 0 && !isLoading && <UserList users={users} />}
+  const handleFilterChange = e => {
+    saveToLocalStorage(STORAGE_KEY_FILTER, e.target.value);
+    setFilter(e.target.value);
+  };
 
-      <LoadMoreButton handleLoadMore={handleLoadMore} />
-    </MainContainer>
+  const visibleUsers = getVisibleUsers(filter, users);
+
+  const showLoadMoreButton =
+    getVisibleUsers.length > 0 && totalUsers - page * 6 > 0;
+
+  return (
+    <ContainerTweetsPage>
+      {isLoading && <Loader isLoading={isLoading} />}
+      <Filter filter={filter} handleFilterChange={handleFilterChange} />
+      {error && <RequestError />}
+
+      {users.length > 0 && !isLoading && <UserList users={visibleUsers} />}
+
+      {showLoadMoreButton && (
+        <LoadMoreButton
+          handleLoadMore={handleLoadMore}
+          disabled={isLoading}
+          isLoadingMore={isLoadingMore}
+        />
+      )}
+    </ContainerTweetsPage>
   );
 };
 
