@@ -9,11 +9,11 @@ import {
 import { getVisibleUsers } from 'helpers';
 import { STORAGE_KEY_FILTER } from 'constants';
 
-import UserList from 'components/UserList';
 import RequestError from 'components/RequestError';
 import Loader from 'components/Loader';
 import LoadMoreButton from 'components/LoadMoreButton';
 import Filter from 'components/Filter';
+import UserList from 'components/UserList';
 
 import { ContainerTweetsPage } from './TweetsPage.styled';
 
