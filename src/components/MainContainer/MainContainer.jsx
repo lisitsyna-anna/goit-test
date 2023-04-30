@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Container } from './MainContainer.styled';
 
 const MainContainer = ({ children }) => {
@@ -5,3 +6,7 @@ const MainContainer = ({ children }) => {
 };
 
 export default MainContainer;
+
+MainContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};

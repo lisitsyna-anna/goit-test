@@ -33,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
       text-decoration: none;
-      color: 'inherit',
+      color: inherit,
   }
   button{
       cursor: pointer

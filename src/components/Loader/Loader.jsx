@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Comment } from 'react-loader-spinner';
 import { LoaderWrapper } from './Loader.styled';
 
@@ -17,3 +18,7 @@ const Loader = isLoading => {
 };
 
 export default Loader;
+
+Loader.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+};

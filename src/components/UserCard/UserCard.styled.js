@@ -1,8 +1,11 @@
 import styled from 'styled-components';
+import bgCard1x from '../../images/cardBg-1x.png';
+import bgCard2x from '../../images/cardBg-2x.png';
 
 export const Card = styled.li`
   position: relative;
   padding-top: 20px;
+
   background-image: linear-gradient(
     114.99deg,
     #471ca9 -0.99%,
@@ -13,41 +16,16 @@ export const Card = styled.li`
   border-radius: ${p => p.theme.radii.cardRadius};
 
   @media screen and (min-width: 768px) {
-    flex-basis: calc((100% - 50px) / 3);
+    flex-basis: calc((100% - 30px) / 2);
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1440px) {
     flex-basis: calc((100% - 96px) / 3);
   }
-`;
-export const UpperWrapper = styled.div`
-  padding-left: 20px;
-  margin-bottom: 136px;
-`;
-
-export const StyledImage = styled.img`
-  position: absolute;
-  width: 218px;
-  top: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  @media screen and (min-width: 768px) {
-    width: 308px;
-  }
-`;
-
-export const UserInfoWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-  align-items: center;
-  padding-bottom: 36px;
 
   &::after {
     position: absolute;
-    top: 40px;
+    top: 214px;
     z-index: 0;
     content: '';
     display: inline-block;
@@ -60,12 +38,50 @@ export const UserInfoWrapper = styled.div`
       inset 0px 3.43693px 2.5777px #fbf8ff;
   }
 `;
+export const UpperWrapper = styled.div`
+  padding-left: 20px;
+  height: 238px;
+  margin-bottom: 26px;
+  background-image: url(${bgCard1x});
+  background-repeat: no-repeat;
+  background-size: 240px 160px;
+  background-position: left 25px top 8px;
+
+  @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url(${bgCard2x});
+  }
+
+  @media screen and (min-width: 768px) {
+    background-size: 280px 168px;
+    background-position: left 36px top 8px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    background-size: 308px 168px;
+    background-position: left 36px top 8px;
+  }
+`;
+
+export const UserInfoWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: center;
+  padding-bottom: 36px;
+`;
 
 export const AvatarWrapper = styled.div`
+  position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  margin-top: 136px;
   overflow: hidden;
   width: 80px;
   height: 80px;
@@ -89,7 +105,7 @@ export const TextWrapper = styled.div`
   font-size: ${p => p.theme.fontSizes.l};
   font-weight: ${p => p.theme.fontWeights.medium};
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1440px) {
     font-size: ${p => p.theme.fontSizes.xl};
   }
 `;

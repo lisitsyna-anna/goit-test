@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const StyledSecondContainer = styled.div`
   max-width: 320px;
-  margin: 0 auto;
   padding: 0 16px;
-  min-height: 100vh;
+  margin: 0 auto;
 
   @media screen and (min-width: 768px) {
     max-width: 768px;

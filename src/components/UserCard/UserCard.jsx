@@ -1,13 +1,6 @@
-import { useState } from 'react';
-import { updateUserFollowers } from 'services/userAPI';
-import {
-  saveToLocalStorage,
-  removeFromLocalStorage,
-  loadFromLocalStorage,
-} from 'services/localStorage';
-
+import PropTypes from 'prop-types';
+import { loadFromLocalStorage } from 'services/localStorage';
 import logo from '../../images/logo-2x.png';
-import cartBgImg from '../../images/cardBg-2x.png';
 import defaultUserAvatar from '../../images/avatar-2x.png';
 import FollowButton from 'components/FollowButton';
 
@@ -16,39 +9,25 @@ import {
   UpperWrapper,
   UserInfoWrapper,
   AvatarWrapper,
-  StyledImage,
   StyledAvatar,
   TextWrapper,
 } from './UserCard.styled';
 
-const UserCard = ({ id, avatar, tweets, followers }) => {
-  const [following, setFollowing] = useState(
-    loadFromLocalStorage(`user_${id}`) || false
-  );
-  const [followersCount, setFollowersCount] = useState(followers);
+const UserCard = ({
+  id,
+  avatar,
+  tweets,
+  followers,
+  handleFollowClickButton,
+}) => {
+  const isFollowing = loadFromLocalStorage(`user_${id}`) === true;
 
-  const handleFollowButtonClick = async () => {
-    if (!following) {
-      const updatedUser = await updateUserFollowers(id, {
-        followers: followersCount + 1,
-      });
-
-      saveToLocalStorage(`user_${id}`, true);
-      setFollowersCount(updatedUser.followers);
-      setFollowing(true);
-    } else {
-      const updatedUser = await updateUserFollowers(id, {
-        followers: followersCount - 1,
-      });
-
-      removeFromLocalStorage(`user_${id}`);
-      setFollowersCount(updatedUser.followers);
-      setFollowing(false);
-    }
+  const onFollowButton = () => {
+    handleFollowClickButton(id, isFollowing);
   };
 
-  const buttonText = following ? 'Following' : 'Follow';
-  const buttonBgColor = following ? '#5CD3A8' : '#EBD8FF';
+  const buttonText = isFollowing ? 'Following' : 'Follow';
+  const buttonBgColor = isFollowing ? '#5CD3A8' : '#EBD8FF';
 
   return (
     <Card key={id}>
@@ -56,9 +35,6 @@ const UserCard = ({ id, avatar, tweets, followers }) => {
         <a href="https://goit.global/ua/">
           <img src={logo} alt="logo" width="76" height="22" />
         </a>
-        <StyledImage src={cartBgImg} alt="Question mark" />
-      </UpperWrapper>
-      <UserInfoWrapper>
         <AvatarWrapper>
           <StyledAvatar
             src={avatar || defaultUserAvatar}
@@ -67,16 +43,21 @@ const UserCard = ({ id, avatar, tweets, followers }) => {
             height="62"
           />
         </AvatarWrapper>
-
+      </UpperWrapper>
+      <UserInfoWrapper>
         <TextWrapper>
-          <p>{tweets} tweets</p>
-          <p>{followersCount} followers</p>
+          <p>{tweets || 100} tweets</p>
+          <p>
+            {followers.toLocaleString('en-US') ||
+              Number('100500').toLocaleString('en-US')}{' '}
+            followers
+          </p>
         </TextWrapper>
 
         <FollowButton
           text={buttonText}
           backgroundColor={buttonBgColor}
-          handleFollowButtonClick={handleFollowButtonClick}
+          handleFollowButtonClick={onFollowButton}
         />
       </UserInfoWrapper>
     </Card>
@@ -84,3 +65,11 @@ const UserCard = ({ id, avatar, tweets, followers }) => {
 };
 
 export default UserCard;
+
+UserCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  tweets: PropTypes.number.isRequired,
+  followers: PropTypes.number.isRequired,
+  handleFollowClickButton: PropTypes.func.isRequired,
+};

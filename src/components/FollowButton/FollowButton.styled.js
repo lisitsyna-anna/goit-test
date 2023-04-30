@@ -13,7 +13,7 @@ export const StyledBtn = styled.button`
   font-size: ${p => p.theme.fontSizes.m};
   font-weight: ${p => p.theme.fontWeights.semiBold};
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1440px) {
     font-size: ${p => p.theme.fontSizes.l};
     height: 50px;
     width: 196px;

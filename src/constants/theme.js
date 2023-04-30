@@ -2,6 +2,7 @@ export const theme = {
   colors: {
     bodyBg: '#766A92',
     mainTextColor: '#EBD8FF',
+    mainAccent: '#471CA9',
     btnTextColor: '#373737',
     followBtnBgColor: '#EBD8FF',
     followingBtnBgColor: '#2196F3',
@@ -31,6 +32,7 @@ export const theme = {
     normal: '1px solid #757575',
   },
   radii: {
+    normal: '4px',
     btnRadius: '10.3108px',
     cardRadius: '20px',
     round: '50%',

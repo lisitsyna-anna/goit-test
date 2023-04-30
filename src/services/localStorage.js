@@ -18,7 +18,7 @@ export const saveToLocalStorage = (key, value) => {
 
 export const removeFromLocalStorage = key => {
   try {
-    localStorage.remove(key);
+    localStorage.removeItem(key);
   } catch (error) {
     console.error('Set state error: ', error.message);
   }
