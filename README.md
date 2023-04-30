@@ -6,7 +6,8 @@ React, with semantic and valid markup, and follows the technical task provided.
 The layout is adaptive, so you can use the application both from a mobile phone
 and tablet and from desktop devices.
 
-Go to the link and take a look. 😎 https://lisitsyna-anna.github.io/goit-test/
+Go to the link and take a look. 😎
+[TweetsApp](https://lisitsyna-anna.github.io/goit-test/)
 
 # Features
 
