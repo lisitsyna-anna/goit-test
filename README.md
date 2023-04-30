@@ -15,8 +15,8 @@ tweets, and number of followers. By clicking on the Follow button, the text
 changes to Following, the button color changes, and the number of followers
 increases by one. The number of followers remains the same even after the page
 is refreshed, and the button remains in the Following state with the
-corresponding color. When you click the Follow button again, the text and color
-change to the initial state, and the number of followers decreases by one.
+corresponding color. When you click the Following button again, the text and
+color change to the initial state, and the number of followers decreases by one.
 
 # Technologies Used
 
@@ -34,11 +34,12 @@ change to the initial state, and the number of followers decreases by one.
 
 To get started with the project, follow these steps:
 
-1. Clone the repository to your local machine using the command git clone
-   https://github.com/lisitsyna-anna/goit-test.git
-2. Change your directory to the cloned repository using the command cd goit-test
-3. Install the dependencies using the command npm install
-4. Start the development server using the command npm start
+1. Clone the repository to your local machine using the command
+   `git clone https://github.com/lisitsyna-anna/goit-test.git`
+2. Change your directory to the cloned repository using the command
+   `cd goit-test`
+3. Install the dependencies using the command `npm install`
+4. Start the development server using the command `npm start`
 
 # Backend
 
@@ -46,8 +47,8 @@ The backend of the application is created using the UI service mockapi.io. The
 users resource is created with the following fields:
 
 - id: unique identifier for each user
-- user: name of the user tweets: number of
-- tweets posted by the user
+- user: name of the user
+- tweets: number of tweets posted by the user
 - followers: number of followers of the
 - user avatar: URL of the user's avatar
 
@@ -64,5 +65,5 @@ application:
 This project was created by Anna Lisitsyna. If you have any questions or
 suggestions, please feel free to contact me.
 
-- [Email](anna.lisicina9309@gmail.com)
+- [Email](https://anna.lisicina9309@gmail.com)
 - [Linkedin](https://www.linkedin.com/in/annalisitsyna/)
