@@ -68,3 +68,4 @@ suggestions, please feel free to contact me.
 
 - [Email](https://anna.lisicina9309@gmail.com)
 - [Linkedin](https://www.linkedin.com/in/annalisitsyna/)
+- [Telegram](https://t.me/anna_lisitsyna)
